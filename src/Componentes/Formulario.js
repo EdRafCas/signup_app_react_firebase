@@ -28,11 +28,11 @@ const Formulario = () => {
 }
  
 const Input = styled.input`
-      padding: 10px;
+      padding: 15px;
       border: 2px solid rgba(0,0,0,.2);
       border-radius: 3px;
       width: 100%;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
       transition: .2s ease all;
       outline: none;
       text-align: center;
