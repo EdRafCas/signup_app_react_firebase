@@ -1,6 +1,7 @@
 import React from 'react';
-import styled from 'styled-components'
-import Formulario from './Componentes/Formulario'
+import styled from 'styled-components';
+import Formulario from './Componentes/Formulario';
+import ListaContactos from './Componentes/ListaContactos';
 
 const App = () => {
       return ( 
@@ -8,6 +9,7 @@ const App = () => {
                   <Titulo>
                         Hello World
                         <Formulario />
+                        <ListaContactos />
                   </Titulo>
             </Contenedor>
        );
