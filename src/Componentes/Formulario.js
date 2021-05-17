@@ -1,12 +1,34 @@
 import React, {useState} from 'react';
 import styled from 'styled-components'
+import db from './../firebase/firebaseConfig';
 
 const Formulario = () => {
       const [nombre, cambiarNombre] = useState('');
       const [correo, cambiarCorreo] = useState('');
 
+      const onSubmit =(e) =>{
+            e.preventDefault();
+
+            db.collection('usuarios').add({
+                  nombre: nombre,
+                  correo: correo,
+            })
+            .then(()=> {
+                  console.log('Se agregó correctamente un documento')
+            })
+            .catch((error)=>{
+                  console.log("Hubo un error al intentar guardar el documento")
+                  console.log(error);
+            })
+
+            cambiarNombre('');
+            cambiarCorreo('');
+
+
+      }
+
       return ( 
-            <form action ="">
+            <form action ="" onSubmit= {onSubmit}>
                   <Input 
                         type= "text"
                         name= "nombre"
@@ -28,11 +50,11 @@ const Formulario = () => {
 }
  
 const Input = styled.input`
-      padding: 15px;
+      padding: 10px;
       border: 2px solid rgba(0,0,0,.2);
       border-radius: 3px;
       width: 100%;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
       transition: .2s ease all;
       outline: none;
       text-align: center;
