@@ -3,24 +3,34 @@ import styled from 'styled-components';
 import db from './../firebase/firebaseConfig';
 
 const Contacto = ({id, nombre, correo}) => {
-      const [editandoTarea, cambiarEditandoTarea] = useState(false);
+    const [editandoTarea, cambiarEditandoTarea] = useState(false);
+
+    const [nuevoNombre, cambiarNuevoNombre] =useState(nombre);
+    const [nuevoCorreo, cambiarNuevoCorreo] =useState(correo);
+
+
+    const actualizarContacto = (e) => {
+        e.preventDefault();
+
+        db.collection('usuarios').doc(id)
+    }
 
       return ( 
             <ContenedorContacto>
                   {editandoTarea ?
-                        <form>
+                        <form action="" onSubmit={actualizarContacto}>
                               <Input
                                     type="text"
                                     name="nombre"
-                                    //value={}
-                                    //onChange={}
+                                    value={nuevoNombre}
+                                    onChange={(e) => cambiarNuevoNombre(e.target.value)}
                                     placeholder="Nombre"
                               />
                               <Input
                                     type="text"
                                     name="correo"
-                                    //value={}
-                                    //onChange={}
+                                    value={nuevoCorreo}
+                                    onChange={(e) => cambiarNuevoCorreo(e.target.value)}
                                     placeholder="Correo"
                               />
                               <Boton type="submit"> Actualizar </Boton>
