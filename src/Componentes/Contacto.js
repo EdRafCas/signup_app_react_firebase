@@ -12,7 +12,28 @@ const Contacto = ({id, nombre, correo}) => {
     const actualizarContacto = (e) => {
         e.preventDefault();
 
-        db.collection('usuarios').doc(id)
+        db.collection('usuarios').doc(id).update({
+            nombre: nuevoNombre,
+            correo: nuevoCorreo
+        })
+        .then(() => {
+            console.log("El usuario se actualizó correctamente");
+        })
+        .catch((e) => {
+            console.log("hubo un error al intentar actualizar el usuario")
+        })
+
+        cambiarEditandoTarea(false)
+    }
+
+    const eliminarContacto = (id) => {
+        db.collection('usuarios').doc(id).delete()
+        .then(() => {
+            console.log("El usuario se eliminó correctamente");
+        })
+        .catch((e) => {
+            console.log("hubo un error al intentar eliminar el usuario")
+        })
     }
 
       return ( 
@@ -40,7 +61,7 @@ const Contacto = ({id, nombre, correo}) => {
                         <Nombre> {nombre} </Nombre>
                         <Correo> {correo} </Correo>
                         <Boton onClick={()=>cambiarEditandoTarea(!editandoTarea)}>Editar</Boton>
-                        <Boton>Borrar</Boton>
+                        <Boton onClick={()=> eliminarContacto(id)} >Borrar</Boton>
                         </>
                   }
             </ContenedorContacto>
